@@ -18,11 +18,10 @@ passport.serializeUser((user, done) =>{
 passport.use(new SteamStrategy({
     returnURL: 'http://localhost:3000/auth/steam/return',
     realm: 'http://localhost:3000/',
-    apiKey: '########################'
+    apiKey: "SecretapikeyLOL"
   },
   (identifier, profile, done) => {
-    console.log("Identifier: "+identifier);
-    console.log("Profile: "+JSON.stringify(profile));
+
 
     try{
        //Find and verify user, might not be needed

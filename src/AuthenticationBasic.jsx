@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 function AuthenticationBasic(){
 
     let [loggedIn, setLoggedIn] = useState(false)
+    let [userData, setUserData] = useState({})
 
 
     function steamLogin(){
@@ -15,38 +16,52 @@ function AuthenticationBasic(){
 
             if(!response.ok) throw new Error("Not authenticated, Please log in")
 
-            const userData = await response.json(); //Parse data to JSON
+            userData = await response.json(); //Parse data to JSON
+
+            setUserData(userData); 
 
             if(!userData.identifier) throw new Error("Bad user data")
 
 
-            
             //Successful fetch
-
-
-            console.log(userData)
             setLoggedIn(true);
-
-
 
         }
         catch(err){
             console.error(err)
         }
-
     }
-
-
     useEffect(() => getUser, []) //Runs only on mount
+    useEffect(() => setUserData(userData), [userData]) //Updates userdata
+
+
 
     return <>
-        <h1>Authentication!</h1>
-        <p>{loggedIn? "User IS logged in": "User is not logged in"}</p>
-        <br></br>
-        <button onClick={steamLogin}>Login with Steam</button>
-        <br></br>
+        <h1>Steam Connect</h1>
+        {loggedIn? 
+        <UserDashboard profile={userData.profile}/>
+        : 
+        <><p>Please log in to continue</p>
+        <button onClick={steamLogin}>Login with Steam</button></>}
+
+
     </>;
 
+}
+
+function UserDashboard(dataProp){
+    console.log(dataProp)
+
+    const avatarUrl = dataProp.profile._json.avatarfull;  
+    const displayName = dataProp.profile.displayName;
+
+
+    return <>
+        <h2>Welcome, {displayName}!</h2>
+        <img src={avatarUrl} placeholder="Steam Avatar"></img>
+    
+    
+    </>
 }
 
 export default AuthenticationBasic;

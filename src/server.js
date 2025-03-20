@@ -49,14 +49,13 @@ app.get('/auth/steam', // Redirects to steam for login
 app.get("/auth/steam/return" , passport.authenticate('steam'), (request, response) => {
 
 
-    console.log(`Sucessful Login USer is: ${request.session.passport.user}`)
     return response.status(201).redirect('http://localhost:5173/');
 })
 
 
 app.get("/user", (request, response) =>{
 
-    console.log(request.user)
+    console.log(`User Get request`)
 
     if(request.user != null){
         console.log("Sending user")
