@@ -18,7 +18,7 @@ passport.serializeUser((user, done) =>{
 passport.use(new SteamStrategy({
     returnURL: 'http://localhost:3000/auth/steam/return',
     realm: 'http://localhost:3000/',
-    apiKey: "SecretapikeyLOL"
+    apiKey: "NottellingYOU!"
   },
   (identifier, profile, done) => {
 

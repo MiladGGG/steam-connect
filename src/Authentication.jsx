@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
+import Dashboard from "./Dashboard";
 
-function AuthenticationBasic(){
+function Authentication(){
 
     let [loggedIn, setLoggedIn] = useState(false)
     let [userData, setUserData] = useState({})
@@ -37,31 +38,32 @@ function AuthenticationBasic(){
 
 
     return <>
-        <h1>Steam Connect</h1>
+        
         {loggedIn? 
-        <UserDashboard profile={userData.profile}/>
+        <Dashboard profile={userData.profile}/>
         : 
-        <><p>Please log in to continue</p>
-        <button onClick={steamLogin}>Login with Steam</button></>}
+        <>
+        <div className="containerHeader" >
+            <h2>Steam Connect</h2>
+        </div>
+
+        <div className="bodyContainer">
+            
+            <div className="bodyContents">
+                <p>Please log with Steam in to continue</p>
+                <button onClick={steamLogin}>Login with Steam</button>
+
+            </div>
+        </div>
+        </>
+
+        }
 
 
     </>;
 
 }
 
-function UserDashboard(dataProp){
-    console.log(dataProp)
-
-    const avatarUrl = dataProp.profile._json.avatarfull;  
-    const displayName = dataProp.profile.displayName;
 
 
-    return <>
-        <h2>Welcome, {displayName}!</h2>
-        <img src={avatarUrl} placeholder="Steam Avatar"></img>
-    
-    
-    </>
-}
-
-export default AuthenticationBasic;
+export default Authentication;

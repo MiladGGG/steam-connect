@@ -1,9 +1,12 @@
-import AuthenticationBasic from './AuthenticationBasic'
+import Header from './Header';
+import Authentication from './Authentication'
+
 
 function App() {
   
   return <>
-    <AuthenticationBasic/>
+  <Header/>
+    <Authentication/>
   
   </>;
 }
