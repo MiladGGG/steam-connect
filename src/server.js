@@ -71,6 +71,36 @@ app.get("/user", (request, response) =>{
 
 
 
+app.get("/user/inventory", async (request, response) => {
+
+
+    if(request.user != null){
+        console.log("Attempting to load inventorty: ")
+
+        try{
+            const inv = await fetch(`https://steamcommunity.com/inventory/${request.user.profile._json.steamid}/730/2`); //FETCH DATA
+
+            if(!inv.ok) throw new Error("Not authenticated, Please log in")
+
+            let data = await inv.json()
+
+            return response.status(200).send(data);
+
+        }
+        catch(err){
+            console.error(err)
+        }
+        
+    }
+    else{
+        return response.sendStatus(401);
+    }
+
+});
+
+
+
+
 
 
 

@@ -5,6 +5,8 @@ function Authentication(){
 
     let [loggedIn, setLoggedIn] = useState(false)
     let [userData, setUserData] = useState({})
+    let [userInventory, setUserInventory] = useState({})
+
 
 
     function steamLogin(){
@@ -27,20 +29,44 @@ function Authentication(){
             //Successful fetch
             setLoggedIn(true);
 
+            await getInventory();
+
         }
         catch(err){
             console.error(err)
         }
     }
+    async function getInventory(){
+        try{
+            const response = await fetch(`http://localhost:3000/user/inventory`
+                , {  credentials: "include"}); //FETCH DATA
+
+            if(!response.ok) throw new Error("Not authenticated, Please log in")
+
+            let data = await response.json();
+            console.log(data)
+
+            if(data.success !== 1) throw new Error("Error retrieving inventory, check if Steam inventory is set to public")
+
+            setUserInventory(data); 
+
+
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
+
     useEffect(() => getUser, []) //Runs only on mount
     useEffect(() => setUserData(userData), [userData]) //Updates userdata
+    useEffect(() => setUserInventory(userInventory), [userInventory]) //Updates userinv
 
 
 
     return <>
         
         {loggedIn? 
-        <Dashboard profile={userData.profile}/>
+        <Dashboard profile={userData.profile} inventory={userInventory}/>
         : 
         <>
         <div className="containerHeader" >

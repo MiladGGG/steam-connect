@@ -31,6 +31,10 @@ function Dashboard(dataProp){
     const displayName = dataProp.profile.displayName;
 
     //Get rest of information from  steam website
+
+    const inventorySize = dataProp.inventory.total_inventory_count;
+    const iconUrlBase = "https://steamcommunity-a.akamaihd.net/economy/image/"
+    //const allInvIcons = dataProp.inventory.descriptions.map(Yaddabadda)
     
 
    let accountCreatedFullStr = calculateTimeAgo(dataProp.profile._json.timecreated *1000)
@@ -50,6 +54,20 @@ function Dashboard(dataProp){
                 <h2>{displayName}</h2>
                 
                 <label>Account Created: {accountCreatedFullStr}</label>
+
+
+            </div>
+
+
+            <div className="inventoryDisplay">
+                <h2>Inventory</h2>
+
+                <img src={`https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposr-kLAtl7PLFTj9Q49Kskb-Yh_bmOLfUqWdY781lxLnArd-g3FDk_xdsMDjwLILBIVVsYl3TqFG3ye3t1pLvvsibyyFmuiU8pSGKebQWDVI`
+} placeholder="Steam Avatar"></img>
+
+                
+                
+                <label>Inventory size: {inventorySize}</label>
 
 
             </div>
