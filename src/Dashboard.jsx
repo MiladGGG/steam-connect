@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from "react";
+import "./dashboard-css/items.css"
+import "./dashboard-css/checkbox.css"
+import "./dashboard-css/dashboard.css"
 
 function calculateTimeAgo(timeCreated){ //Not maintainable but its still really cool code 😍,
     const now = new Date();
@@ -283,7 +286,7 @@ function Dashboard(dataProp){
 
                 <h2>{displayName}</h2>
                 
-                <label>Steam State: <i>{personaState}</i></label><br></br>
+                <label>Steam Status: <i>{personaState}</i></label><br></br>
                 <label>Profile Visibility: {profilePublic}</label><br></br><br></br>
                 <label>Account Created: {accountCreatedFullStr}</label><br></br>
                 

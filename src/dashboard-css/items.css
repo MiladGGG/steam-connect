@@ -1,0 +1,65 @@
+
+.inventoryItems{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #0e1220;
+
+}
+
+.item{
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    background-color: rgb(61, 86, 86);
+
+    border: 7px solid rgba(255, 255, 255, 0.2);
+    border-color: #0e1220;
+    
+
+    border-radius:  8px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    overflow: hidden;
+    margin: 20px;
+
+    position: relative;
+
+}
+
+.item img{
+    display: block;
+    width: 100%;
+    height: auto;
+
+}
+
+
+.item label{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.wearText{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 65%;
+}
+
+#game-icon{
+    padding: 0px;
+
+    border: 2px solid;
+    border-radius: 30%;
+
+    position: absolute;
+    top: 85%;
+    left: 5%; /* Change to 'left' or 'bottom' for other corners */
+    width: 10%; /* Adjust as needed */
+    height: auto;
+
+}
