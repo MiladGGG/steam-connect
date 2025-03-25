@@ -1,6 +1,11 @@
 import passport from "passport";
 import pkg from "passport-steam";
+
 const SteamStrategy = pkg;
+ 
+import {configDotenv} from "dotenv"; //Import environment file
+configDotenv(); //Initialise
+
 
 
 passport.serializeUser((user, done) =>{
@@ -18,7 +23,7 @@ passport.serializeUser((user, done) =>{
 passport.use(new SteamStrategy({
     returnURL: 'http://localhost:3000/auth/steam/return',
     realm: 'http://localhost:3000/',
-    apiKey: "supersecret"
+    apiKey: process.env.STEAM_API_KEY
   },
   (identifier, profile, done) => {
 

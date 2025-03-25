@@ -3,7 +3,10 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "./auth/steam-strategy.js";
-import cors from 'cors';
+import cors from 'cors'; 
+
+import {configDotenv} from "dotenv"; //Import environment file
+configDotenv(); //Initialise
 
 
 const app = express();
@@ -16,7 +19,7 @@ app.use(cookieParser())//Parse cookies
 
 
 app.use(session({ //Handle sessions with cookies
-    secret: "SECRET-KEY",
+    secret: process.env.SECRET_KEY,
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -64,23 +67,21 @@ app.get("/user", (request, response) =>{
     }
     else{
         return response.sendStatus(401);
-    }
+    } 
 
 })
 
 
 
 
-app.get("/user/inventory", async (request, response) => {
-
+app.post("/user/inventory", async (request, response) => {
 
     if(request.user != null){
-        console.log("Attempting to load inventorty: ")
 
         try{
-            const inv = await fetch(`https://steamcommunity.com/inventory/${request.user.profile._json.steamid}/730/2`); //FETCH DATA
-
-            if(!inv.ok) throw new Error("Not authenticated, Please log in")
+            const inv = await fetch(`https://steamcommunity.com/inventory/${request.user.profile._json.steamid}/${request.body.gameCode}/2`); //FETCH DATA
+    
+            if(!inv.ok) throw new Error("Not authen ticated, Please log in")
 
             let data = await inv.json()
 
@@ -99,6 +100,34 @@ app.get("/user/inventory", async (request, response) => {
 });
 
 
+app.post("/user/inventory/price", async (request, response) => {
+
+    if(request.user != null){
+        console.log("Attempting to load item price: ")
+
+        try{
+            const url = `https://steamcommunity.com/market/priceoverview/?country=NL&currency=2&appid=730&market_hash_name=${encodeURIComponent(request.body.url)}`;
+            const priceResponse = await fetch(url);
+            console.log(priceResponse)
+
+            if(priceResponse.status <= 300 ) throw new Error("Failure in retreiving price")
+
+            let price = await priceResponse.json()
+
+            return response.status(200).send(price);
+
+        }
+        catch(err){
+            console.error(err)
+
+        }
+        
+    }
+    else{
+        return response.sendStatus(401);
+    }
+
+});
 
 
 

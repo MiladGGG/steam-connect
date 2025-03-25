@@ -101,7 +101,7 @@ body{
     margin-left: auto;
     margin-right: auto;
 
-    margin-bottom: 200px;
+    margin-bottom: 75px;
 
 
 }
@@ -111,6 +111,7 @@ body{
 .userDisplay img{
     border-radius: 50px;
     margin-right: 50px;
+    margin-bottom: 100px;
 
 
     float: left;
@@ -118,10 +119,213 @@ body{
     border: 5px solid transparent;
     border-color: rgba(0, 0, 0, 0.3);
 
+}
 
-}   
+.userDisplay button{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #3b4573;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    font-stretch: condensed;
+    letter-spacing: 1px;
+    color: rgb(200, 200, 203);
+
+    transition: background-color 0.2s;
+    transition: color 0.2s;
+}
+.userDisplay button:hover{
+    background-color: #bfc4da;
+    color: black
+
+}
 
 
+
+
+
+
+
+
+
+
+
+
+.inventoryHeader{
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+
+#toggle-buttons{
+    display: flex;
+    margin-top: -30px;
+    float: right;
+    margin-right: 100px;
+}
+
+#toggle-buttons img{
+    width: auto;
+    height: 10%;
+    padding: 0px;
+    margin-left: 25px;
+
+    border: 3px solid;
+    border-radius: 30%;
+}
+
+
+
+
+
+.checkbox-wrapper-2 .ikxBAC {
+    appearance: none;
+    background-color: #dfe1e4;
+    border-radius: 72px;
+    border-style: none;
+    flex-shrink: 0;
+    height: 20px;
+    margin: 0;
+    position: relative;
+    width: 30px;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC::before {
+    bottom: -6px;
+    content: "";
+    left: -6px;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC,
+  .checkbox-wrapper-2 .ikxBAC::after {
+    transition: all 100ms ease-out;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+  }
+
+  .checkbox-wrapper-2 input[type=checkbox] {
+    cursor: default;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC:hover {
+    background-color: #c9cbcd;
+    transition-duration: 0s;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC:checked {
+    background-color: #6e79d6;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC:checked::after {
+    background-color: #fff;
+    left: 13px;
+  }
+
+  .checkbox-wrapper-2 :focus:not(.focus-visible) {
+    outline: 0;
+  }
+
+  .checkbox-wrapper-2 .ikxBAC:checked:hover {
+    background-color: #535db3;
+  }
+
+
+.checkbox-wrapper-2 {
+    display: block;
+    padding: 10px;
+    margin-left: 0px; 
+
+}
+
+
+
+
+
+
+
+
+.inventoryItems{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #0e1220;
+
+}
+
+.item{
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    background-color: rgb(61, 86, 86);
+
+    border: 7px solid rgba(255, 255, 255, 0.2);
+    border-color: #0e1220;
+    
+
+    border-radius:  8px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    overflow: hidden;
+    margin: 20px;
+
+    position: relative;
+
+}
+
+.item img{
+    display: block;
+    width: 100%;
+    height: auto;
+
+}
+
+
+.item label{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.wearText{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 65%;
+}
+
+#game-icon{
+    padding: 0px;
+
+    border: 2px solid;
+    border-radius: 30%;
+
+    position: absolute;
+    top: 85%;
+    left: 5%; /* Change to 'left' or 'bottom' for other corners */
+    width: 10%; /* Adjust as needed */
+    height: auto;
+
+}
 
 
 

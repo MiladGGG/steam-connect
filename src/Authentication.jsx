@@ -4,6 +4,8 @@ import Dashboard from "./Dashboard";
 function Authentication(){
 
     let [loggedIn, setLoggedIn] = useState(false)
+    let [inventoryDefined, setInventoryDefined] = useState(false)
+
     let [userData, setUserData] = useState({})
     let [userInventory, setUserInventory] = useState({})
 
@@ -29,17 +31,35 @@ function Authentication(){
             //Successful fetch
             setLoggedIn(true);
 
-            await getInventory();
+            await getInventory("730"); //CS2
+            await getInventory("440"); //TF2
+            await getInventory("578080"); //TF2
+
+
+            //Successful fetch
+            setInventoryDefined(true);
+
 
         }
         catch(err){
             console.error(err)
         }
     }
-    async function getInventory(){
+    async function getInventory(gameCode){
         try{
-            const response = await fetch(`http://localhost:3000/user/inventory`
-                , {  credentials: "include"}); //FETCH DATA
+            const response = await fetch(`http://localhost:3000/user/inventory`,
+                {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+        
+                    body: JSON.stringify({
+                      gameCode: gameCode
+                    })
+                });
+
 
             if(!response.ok) throw new Error("Not authenticated, Please log in")
 
@@ -48,7 +68,12 @@ function Authentication(){
 
             if(data.success !== 1) throw new Error("Error retrieving inventory, check if Steam inventory is set to public")
 
-            setUserInventory(data); 
+            setUserInventory((previousData) => {
+                previousData[gameCode] = data;
+                return previousData
+            }); 
+
+            
 
 
         }
@@ -65,8 +90,8 @@ function Authentication(){
 
     return <>
         
-        {loggedIn? 
-        <Dashboard profile={userData.profile} inventory={userInventory}/>
+        {loggedIn?
+        inventoryDefined? <Dashboard profile={userData.profile} inventory={userInventory}/>: <label>Loading Inventory, please wait.</label>
         : 
         <>
         <div className="containerHeader" >
