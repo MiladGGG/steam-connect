@@ -14,7 +14,7 @@ const app = express();
 //Middleware
 app.use(express.json()); //ParseJSON
 app.use(cookieParser())//Parse cookies
-
+ 
 
  
 
@@ -31,9 +31,13 @@ app.use(passport.initialize()); //Runs once and modifies request object :) CHAMA
 app.use(passport.session()); // Adds cookie to session, Session is now LOCKED IN
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL, // allow requests
-    credentials: true // enable cookie and sessions
+    origin: [process.env.FRONTEND_URL], // allow requests
+    credentials: true, // enable cookie and sessions
+    methods: ['GET', 'POST']
+
+
   }));
+
 
 
 

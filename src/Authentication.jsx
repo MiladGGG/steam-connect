@@ -10,13 +10,16 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     let [userData, setUserData] = useState({})
     let [userInventory, setUserInventory] = useState({})
 
-
     const serverBaseUrl = import.meta.env.VITE_SERVER_URL;
 
     async function loadSampleProfile(){
         try{
-            const response = await fetch(serverBaseUrl+"/user/sampleprofile"); //FETCH DATA
+            const response = await fetch(serverBaseUrl+"/user/sampleprofile", {
+                method: 'GET',
 
+            }); //FETCH DATA
+
+            
             if(!response.ok) throw new Error("Not authenticated, Please log in")
 
             userData = await response.json(); //Parse data to JSON
@@ -25,7 +28,11 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
 
 
 
-            const response2 = await fetch(serverBaseUrl+"/user/sampleinventory"); //FETCH DATA
+            const response2 = await fetch(serverBaseUrl+"/user/sampleinventory", {
+                method: 'GET',
+              }
+            ); //FETCH DATA
+
 
             if(!response2.ok) throw new Error("Not authenticated, Please log in")
 
