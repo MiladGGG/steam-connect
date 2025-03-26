@@ -16,7 +16,7 @@ app.use(express.json()); //ParseJSON
 app.use(cookieParser())//Parse cookies
 
 
-
+ 
 
 app.use(session({ //Handle sessions with cookies
     secret: process.env.SECRET_KEY,
@@ -31,7 +31,7 @@ app.use(passport.initialize()); //Runs once and modifies request object :) CHAMA
 app.use(passport.session()); // Adds cookie to session, Session is now LOCKED IN
 
 app.use(cors({
-    origin: "http://localhost:5173", // allow requests
+    origin: process.env.FRONTEND_URL, // allow requests
     credentials: true // enable cookie and sessions
   }));
 
@@ -52,7 +52,7 @@ app.get('/auth/steam', // Redirects to steam for login
 app.get("/auth/steam/return" , passport.authenticate('steam'), (request, response) => { //Return endpoint after steam auth
 
 
-    return response.status(201).redirect('http://localhost:5173/');
+    return response.status(201).redirect(process.env.FRONTEND_URL);
 })
  
 

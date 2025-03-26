@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Dashboard from "./Dashboard";
 
+
 function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
 
     let [loggedIn, setLoggedIn] = useState(false)
@@ -9,9 +10,12 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     let [userData, setUserData] = useState({})
     let [userInventory, setUserInventory] = useState({})
 
+
+    const serverBaseUrl = import.meta.env.VITE_SERVER_URL;
+
     async function loadSampleProfile(){
         try{
-            const response = await fetch("http://localhost:3000/user/sampleprofile"); //FETCH DATA
+            const response = await fetch(serverBaseUrl+"/user/sampleprofile"); //FETCH DATA
 
             if(!response.ok) throw new Error("Not authenticated, Please log in")
 
@@ -21,7 +25,7 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
 
 
 
-            const response2 = await fetch("http://localhost:3000/user/sampleinventory"); //FETCH DATA
+            const response2 = await fetch(serverBaseUrl+"/user/sampleinventory"); //FETCH DATA
 
             if(!response2.ok) throw new Error("Not authenticated, Please log in")
 
@@ -45,12 +49,12 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     }
 
     function steamLogin(){
-        window.location.href = "http://localhost:3000/auth/steam"
+        window.location.href = serverBaseUrl+"/auth/steam"
     }
 
     async function getUser(){
         try{
-            const response = await fetch("http://localhost:3000/user", {credentials: "include"}); //FETCH DATA
+            const response = await fetch(serverBaseUrl+"/user", {credentials: "include"}); //FETCH DATA
 
             if(!response.ok) throw new Error("Not authenticated, Please log in")
 
@@ -79,7 +83,7 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     }
     async function getInventory(gameCode){
         try{
-            const response = await fetch(`http://localhost:3000/user/inventory`,
+            const response = await fetch(serverBaseUrl+"/user/inventory",
                 {
                     method: "POST",
                     credentials: "include",
@@ -120,7 +124,7 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     if(logOutSignal){
         async function logOut(){
             try{
-                let response =  await fetch("http://localhost:3000/user/logout", {credentials: "include"})
+                let response =  await fetch(serverBaseUrl+"/user/logout", {credentials: "include"})
                 console.log(response    )
                 window.location.reload();
 

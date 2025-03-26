@@ -14,6 +14,7 @@ export default [
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
+
       },
     },
     plugins: {
@@ -22,6 +23,8 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
+      "node": true,
+
       ...reactHooks.configs.recommended.rules,
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': [

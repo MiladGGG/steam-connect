@@ -29,40 +29,7 @@ function calculateTimeAgo(timeCreated){ //Not maintainable but its still really 
 
 
 
-async function getItemPrice(isMarketable, itemUrl){ //Volatile and request rates easily exceeded
-    if(!isMarketable){
-        return -1;
-    }
-    try{
-        const response = await fetch("http://localhost:3000/user/inventory/price", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
 
-            body: JSON.stringify({
-              url: itemUrl
-            })
-        });
-
-    
-        if(!response.ok) throw new Error("Error retrieving item price")
-    
-        priceData = await response.json(); //Parse data to JSON
-
-        console.log(priceData);
-        return priceData
-
-    }
-    catch(err){
-        
-        console.error(err);
-        return "$0.00";   
-    }
-
-
-}
 
 function hexToRgba(hex, alpha = 0.5) {
     hex = hex.replace('#', '');
