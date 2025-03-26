@@ -49,27 +49,57 @@ app.get('/auth/steam', // Redirects to steam for login
 
  
 
-app.get("/auth/steam/return" , passport.authenticate('steam'), (request, response) => {
+app.get("/auth/steam/return" , passport.authenticate('steam'), (request, response) => { //Return endpoint after steam auth
 
 
     return response.status(201).redirect('http://localhost:5173/');
 })
+ 
 
-
-app.get("/user", (request, response) =>{
+app.get("/user", (request, response) =>{ //Send user stored after auth
 
     console.log(`User Get request`)
-
-    if(request.user != null){
+ 
+    if(request.user != null){ 
         console.log("Sending user")
         
-        return response.status(200).send(request.user)
+        return response.status(200).send(request.user) 
     }
     else{
         return response.sendStatus(401);
-    } 
+    }  
 
 })
+
+app.get("/user/sampleprofile", (request, response) =>{ //Send user stored after auth
+
+    console.log(`Sample profile request`)
+
+    const parsedJSON = JSON.parse(process.env.SAMPLE_DATA);
+
+         
+    return response.status(200).send(parsedJSON)
+
+})
+app.get("/user/sampleinventory", (request, response) =>{ //Send user stored after auth
+
+    console.log(`Sample inventroy request`)
+
+    const parsedJSON = JSON.parse(process.env.SAMPLE_INVENTORY);
+
+         
+    return response.status(200).send(parsedJSON)
+
+})
+
+app.get("/user/logout" ,(request, response) =>{ //Send user stored after auth
+
+    console.log(`Logging out`)
+
+    request.logout((err) => {response.sendStatus(500)})        
+})
+
+
 
 
 

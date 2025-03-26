@@ -152,7 +152,6 @@ function addSomeFakeItems(invItemsArr){
 
 
 function Dashboard(dataProp){
-    console.log(dataProp)
 
 
 
@@ -165,12 +164,87 @@ function Dashboard(dataProp){
     const steamId = dataProp.profile.id; 
 
 
-
     const accountCreatedFullStr = calculateTimeAgo(dataProp.profile._json.timecreated *1000)
 
     const openSteamLink = () => window.open(dataProp.profile._json.profileurl , '_blank').focus()
 
 
+    const gameIcons = {cs2: "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/730/8dbc71957312bbd3baea65848b545be9eae2a355.jpg"
+        ,tf2:"https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/440/e3f595a92552da3d664ad00277fad2107345f743.jpg"
+        ,pubg:"https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/578080/609f27278aa70697c13bf99f32c5a0248c381f9d.jpg"
+}
+
+
+
+    if(displayName === "steam_user321"){
+        let displayItems = dataProp.inventory;
+
+        return <>
+        <div className="containerHeader">
+            <h2>Welcome, {displayName}!</h2>
+
+        </div>
+        
+
+        <div className="bodyContainer">
+            <div className="userDisplay">
+                <img src={avatarUrl} placeholder="Steam Avatar"></img>
+
+                <h2>{displayName}</h2>
+                
+                <label>Steam Status: <i>{personaState}</i></label><br></br>
+                <label>Profile Visibility: {profilePublic}</label><br></br><br></br>
+                <label>Account Created: {accountCreatedFullStr}</label><br></br>
+                
+
+                <br></br>
+                <button>View on Steam</button><br></br>
+                <label>Steam ID: {steamId}</label><br></br>
+
+            </div>
+
+            <div className="inventoryHeader">
+                <h2>Inventory</h2>
+                <label>Inventory size: 10</label>
+
+               
+
+
+
+          
+                
+            </div>
+
+            <div className="inventoryDisplay">
+                
+
+                <div className="inventoryItems">
+                    {displayItems.map((item,index) => {
+                        return <div className="item" style={{borderColor:item.color.value, backgroundColor:item.color.value}}>
+                                <label>{item.name}</label>
+                                <label className="wearText">{item.wear}</label>
+                                <img src={item.iconUrl}></img>
+                                
+                                    <img id="game-icon" src={gameIcons[item.game]}></img>
+                                
+
+
+                        </div>
+                    }) }
+
+
+                </div>
+                
+                
+
+
+            </div>
+
+        </div>
+    
+    
+    </> 
+    }
 
 
     //Inventory
@@ -178,11 +252,6 @@ function Dashboard(dataProp){
     let [dynamicInventorySize, setDynamicInventorySize] = useState(inventorySize);
     let [inventorySizeStr, setInventorySizeStr] = useState(`${inventorySize}`);
     const iconUrlBase = "https://steamcommunity-a.akamaihd.net/economy/image/"
-
-    const gameIcons = {cs2: "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/730/8dbc71957312bbd3baea65848b545be9eae2a355.jpg"
-                    ,tf2:"https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/440/e3f595a92552da3d664ad00277fad2107345f743.jpg"
-                    ,pubg:"https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/578080/609f27278aa70697c13bf99f32c5a0248c381f9d.jpg"
-    }
 
 
     
@@ -241,6 +310,9 @@ function Dashboard(dataProp){
 
     addSomeFakeItems(inventoryItems); // Adding about 5 fake Cs2 items for display
     
+
+
+
     inventoryItems.sort((a,b) => {return  b.color.tier -a.color.tier })
 
 

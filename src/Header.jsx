@@ -1,7 +1,25 @@
+import Authentication from "./Authentication";
+import { useState } from "react";
+
 
 function Header(){
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [logOutSignal, setLogOutSignal] = useState(false);
+    const [logInSignal, setLogInSignal] = useState(false);
 
-    return <div className="header">
+
+
+
+    const isLoggedInMessage = (childMessage) => {
+        setLoggedIn(childMessage);
+    }
+
+    function logButton(){
+        loggedIn? setLogOutSignal(true): setLogInSignal(true)
+    }
+
+
+    return <><div className="header">
         <div className="header-start">
 
             <label id="header-label">STEAM CONNECT</label>
@@ -11,13 +29,18 @@ function Header(){
         <div className="header-end">
 
 
-            <label >LOG IN</label>
+            <button onClick={logButton}>{!loggedIn? "LOG IN": "LOG OUT"}</button>
  
 
             
         </div>
 
+
     </div>
+        <Authentication logOutSignal={logOutSignal} logInSignal={logInSignal} isLoggedInMessage={isLoggedInMessage}/>
+
+    </>
+
 }
 
 export default Header;
