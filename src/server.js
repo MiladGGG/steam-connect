@@ -21,6 +21,7 @@ const app = express();
 
 app.use(cors({
     origin: [process.env.FRONTEND_URL], // allow requests
+
     credentials: true, // enable cookie and sessions
     methods: ['GET', 'POST']
 
@@ -37,6 +38,8 @@ app.use(cookieParser())//Parse cookies
 app.use(session({ //Handle sessions with cookies
     secret: process.env.SECRET_KEY,
     saveUninitialized: false,
+    httpOnly: true, //secure
+    secure: process.env.NODE_ENV === 'production',
     resave: false,
     cookie: {
         maxAge: 60000 * 60 //1 hour
