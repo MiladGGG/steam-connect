@@ -10,7 +10,7 @@ function Authentication({logInSignal, logOutSignal, isLoggedInMessage}){
     let [userData, setUserData] = useState({})
     let [userInventory, setUserInventory] = useState({})
 
-    const serverBaseUrl = import.meta.env.VITE_SERVER_URL;
+    const serverBaseUrl = import.meta.env.VITE_SERVER_URL; 
 
     async function loadSampleProfile(){
         try{

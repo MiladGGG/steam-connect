@@ -5,6 +5,10 @@ import session from "express-session";
 import passport from "./auth/steam-strategy.js";
 import cors from 'cors'; 
 
+
+console.log("🚀 Server starting...");
+
+
 import {configDotenv} from "dotenv"; //Import environment file
 configDotenv(); //Initialise
 
@@ -12,6 +16,18 @@ configDotenv(); //Initialise
 const app = express();
 
 //Middleware
+
+
+
+app.use(cors({
+    origin: [process.env.FRONTEND_URL], // allow requests
+    credentials: true, // enable cookie and sessions
+    methods: ['GET', 'POST']
+
+
+  }));
+  
+
 app.use(express.json()); //ParseJSON
 app.use(cookieParser())//Parse cookies
  
@@ -30,13 +46,7 @@ app.use(session({ //Handle sessions with cookies
 app.use(passport.initialize()); //Runs once and modifies request object :) CHAMA
 app.use(passport.session()); // Adds cookie to session, Session is now LOCKED IN
 
-app.use(cors({
-    origin: [process.env.FRONTEND_URL], // allow requests
-    credentials: true, // enable cookie and sessions
-    methods: ['GET', 'POST']
 
-
-  }));
 
 
 
