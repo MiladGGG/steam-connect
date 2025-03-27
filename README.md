@@ -22,6 +22,7 @@ Deployment: Render (Backend & Frontend)
 
 ## Check it out
 [Hosted Demo](https://steamconnect.onrender.com/)
+
 Authentication is blocked due to the onrender domain being on the public suffix list. 
 Instead, you can fetch a sample profile from the backend server.
 
@@ -45,10 +46,15 @@ Instead, you can fetch a sample profile from the backend server.
 Download the repository, install dependencies:
 
 Configure an environment file(.env) with these variables.
+
 STEAM_API_KEY=01234 
+
 SECRET_KEY=anycode
+
 FRONTEND_URL=http://localhost:XXXX
+
 VITE_SERVER_URL=http://localhost:XXXX
+
 PORT=XXXX
 
 
