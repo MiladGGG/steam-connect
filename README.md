@@ -31,7 +31,7 @@ Instead, you can fetch a sample profile from the backend server.
 ## Technical Features
 - **React Frontend**: Dynamically changing HTML using React framework.
 - **Functional Backend**: Express backend, effectively communicates data with frontend.
-- **Server Middlware**: Express middleware handles HTTPS, CORS and environment variables.
+- **Server Middleware**: Express middleware handles HTTPS, CORS and environment variables.
 - **Sessions and Cookies**: Sessions and cookies initialised for seamless authentication.
 - **Oauth Login**: Passport.js Steam Strategy authenticates and provides user data to server.
 
